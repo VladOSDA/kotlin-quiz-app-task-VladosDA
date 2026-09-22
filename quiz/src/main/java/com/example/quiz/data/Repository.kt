@@ -30,9 +30,6 @@ class QuestionRepository(private val storage: JsonStorage) {
 
     fun byTheme(theme: QuestionTheme): List<QuestionType> = questions.filter { it.theme == theme }
 
-    fun countByDifficulty(theme: QuestionTheme): Map<Int, Int> =
-        byTheme(theme).groupingBy { it.difficultyLevel }.eachCount().toSortedMap()
-
     fun add(question: QuestionType) {
         require(byId(question.id) == null) { "Вопрос с id «${question.id}» уже существует" }
         questions += question

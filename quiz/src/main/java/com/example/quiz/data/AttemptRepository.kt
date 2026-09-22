@@ -23,9 +23,6 @@ class AttemptRepository(private val storage: JsonStorage) {
 
     fun students(): List<String> = attempts.map { it.studentLogin }.distinct().sorted()
 
-    fun countFor(login: String, themeName: String): Int =
-        attempts.count { it.studentLogin == login && it.themeName == themeName }
-
     fun save(record: AttemptRecord) {
         attempts += record
         persist()

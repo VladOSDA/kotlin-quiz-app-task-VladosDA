@@ -1,7 +1,6 @@
 package com.example.quiz.data
 
 import com.example.quiz.data.dto.QuizConfigDto
-import kotlin.text.toInt
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.minutes
 

@@ -33,7 +33,6 @@ class Attempt(
             if (field) finish()                                  // правило 6
         }
 
-    val total: Int get() = questions.size
 
     val answeredCount: Int get() = answeredQuestions.size
 

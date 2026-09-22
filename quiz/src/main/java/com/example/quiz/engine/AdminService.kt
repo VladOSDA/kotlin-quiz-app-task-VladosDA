@@ -54,7 +54,6 @@ class AdminService(
 
     fun addQuestion(question: QuestionType) = questions.add(question)
 
-    fun updateQuestion(question: QuestionType) = questions.update(question)
 
     fun removeQuestion(id: String): Boolean = questions.remove(id.trim())
 
