@@ -79,6 +79,8 @@ class AdminService(
 
     fun attemptsOf(login: String): List<AttemptRecord> = attempts.byStudent(login.trim())
 
+    fun updateQuestion(question: QuestionType) = questions.update(question)
+
     fun attempt(id: String): AttemptRecord? = attempts.byId(id.trim())
 
     fun removeAttempt(id: String): Boolean = attempts.remove(id.trim())

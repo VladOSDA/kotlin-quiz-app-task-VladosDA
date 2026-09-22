@@ -24,6 +24,7 @@ class AdminCli(private val admin: AdminService) {
             "question-show" -> showQuestion(arg)
             "question-add" -> addQuestion()
             "question-del" -> removeQuestion(arg)
+            "question-edit" -> editQuestion(arg)
             "config" -> printConfig()
             "config-time" -> setTime(arg)
             "config-limit" -> setLimit(arg)
@@ -141,17 +142,7 @@ class AdminCli(private val admin: AdminService) {
             "3" -> {
                 val list1 = askList("Элемент левого списка (пустая строка — закончить)")
                 val list2 = askList("Элемент правого списка (пустая строка — закончить)")
-                val pairs = ask("Правильные пары в формате «1-2 2-3 3-1»")
-                    .split(Regex("[,\\s]+")).filter { it.isNotBlank() }
-                    .associate { token ->
-                        val parts = token.split("-")
-                        val left = parts.getOrNull(0)?.toIntOrNull()
-                        val right = parts.getOrNull(1)?.toIntOrNull()
-                        if (parts.size != 2 || left == null || right == null) {
-                            throw IllegalArgumentException("Неверный формат пары «$token»")
-                        }
-                        (left - 1) to (right - 1)
-                    }
+                val pairs = parsePairs(ask("Правильные пары в формате «1-2 2-3 3-1»"))
                 MapOptions(id, theme, level, description, pairs, list1, list2)
             }
 
@@ -161,6 +152,86 @@ class AdminCli(private val admin: AdminService) {
         admin.addQuestion(question)
         println("Вопрос «$id» добавлен и сохранён в questions.json.")
     }
+
+    private fun editQuestion(arg: String?) {
+        requireArg(arg, "question-edit <id>")
+        val current = admin.question(arg!!.trim())
+            ?: throw IllegalArgumentException("Вопрос «${arg.trim()}» не найден")
+
+        println()
+        showQuestion(arg)
+        println()
+        println("Редактирование «${current.id}». Пустой ввод — оставить как есть.")
+        println("Тип вопроса изменить нельзя: используйте question-del и question-add.")
+
+        val theme = admin.resolveTheme(askOr("Тема", current.theme.themeName))
+        val level = askOr("Уровень сложности", current.difficultyLevel.toString())
+            .trim().toIntOrNull()
+            ?: throw IllegalArgumentException("Уровень должен быть числом")
+        val description = askOr("Формулировка", current.description)
+
+        val updated: QuestionType = when (current) {
+            is MultipleChoice -> {
+                val options = askListOr("Варианты ответа", current.answerOptions)
+                val correct = askOr(
+                    "Номер правильного варианта (1..${options.size})",
+                    current.correctAnswer.toString(),
+                ).trim().toIntOrNull()
+                    ?: throw IllegalArgumentException("Номер должен быть числом")
+                MultipleChoice(current.id, theme, level, description, correct, options)
+            }
+
+            is OpenQuestion -> OpenQuestion(
+                current.id, theme, level, description,
+                askOr("Эталонный ответ", current.correctAnswer),
+            )
+
+            is MapOptions -> {
+                val list1 = askListOr("Левый список", current.list1)
+                val list2 = askListOr("Правый список", current.list2)
+                val defaultPairs = current.correctAnswer.entries
+                    .sortedBy { it.key }
+                    .joinToString(" ") { "${it.key + 1}-${it.value + 1}" }
+                val pairs = parsePairs(askOr("Правильные пары «1-2 2-3»", defaultPairs))
+                MapOptions(current.id, theme, level, description, pairs, list1, list2)
+            }
+        }
+
+        admin.updateQuestion(updated)
+        println("Вопрос «${current.id}» обновлён и сохранён в questions.json.")
+    }
+
+    /** Ввод с текущим значением по умолчанию. */
+    private fun askOr(prompt: String, current: String): String {
+        print("$prompt [$current]: ")
+        val line = readlnOrNull() ?: throw IllegalArgumentException("Ввод прерван")
+        return line.takeIf { it.isNotBlank() }?.trim() ?: current
+    }
+
+    /** Список: либо оставить текущий, либо ввести заново целиком. */
+    private fun askListOr(prompt: String, current: List<String>): List<String> {
+        println("$prompt сейчас:")
+        current.forEachIndexed { index, item -> println("  ${index + 1}) $item") }
+        print("Ввести список заново? (Enter — оставить, «да» — заново): ")
+        val answer = readlnOrNull()?.trim()?.lowercase()
+            ?: throw IllegalArgumentException("Ввод прерван")
+        if (answer != "да" && answer != "y" && answer != "yes") return current
+        return askList("$prompt (пустая строка — закончить)")
+    }
+
+    /** Разбор строки вида «1-2 2-3 3-1» в пары индексов (внутри — с нуля). */
+    private fun parsePairs(input: String): Map<Int, Int> =
+        input.split(Regex("[,\\s]+"))
+            .filter { it.isNotBlank() }
+            .associate { token ->
+                val parts = token.split("-")
+                val left = parts.getOrNull(0)?.toIntOrNull()
+                val right = parts.getOrNull(1)?.toIntOrNull()
+                if (parts.size != 2 || left == null || right == null) {
+                    throw IllegalArgumentException("Неверный формат пары «$token» — ожидается «1-2»")
+                }
+                (left - 1) to (right - 1)
+            }
 
     // ───── Параметры ─────
 
@@ -277,6 +348,7 @@ class AdminCli(private val admin: AdminService) {
               question-show <id>      — показать вопрос целиком
               question-add            — добавить вопрос (пошагово)
               question-del <id>       — удалить вопрос
+              question-edit <id>      — изменить вопрос
               config                  — параметры теста
               config-time <минуты>    — лимит времени
               config-limit <вопросов> — лимит вопросов на тему
