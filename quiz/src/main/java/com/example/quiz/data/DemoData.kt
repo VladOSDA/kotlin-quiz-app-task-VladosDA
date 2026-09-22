@@ -4,11 +4,22 @@ import com.example.quiz.data.dto.PairDto
 import com.example.quiz.data.dto.QuestionBankDto
 import com.example.quiz.data.dto.QuestionDto
 
+/** Демонстрационный банк вопросов — записывается в questions.json при первом запуске. */
 object DemoData {
 
     fun questionBank(): QuestionBankDto = QuestionBankDto(
-        themes = listOf("Синтаксис", "Null safety", "Коллекции", "Типы", "Функции", "ООП"),
+        themes = listOf(
+            "Синтаксис",
+            "Безопасность null",
+            "Коллекции",
+            "Типы данных",
+            "Функции",
+            "ООП",
+            "Физика",
+        ),
         questions = listOf(
+
+            // ───────── Синтаксис ─────────
             QuestionDto.Choice(
                 id = "val-vs-var",
                 theme = "Синтаксис",
@@ -24,30 +35,28 @@ object DemoData {
                 description = "Как называется функция — точка входа в Kotlin-программу?",
                 correctText = "main",
             ),
-            QuestionDto.Matching(
-                id = "scope-functions-return",
-                theme = "Функции",
-                difficultyLevel = 3,
-                description = "Сопоставьте scope-функцию с тем, что она возвращает",
-                list1 = listOf("let", "also", "apply", "run"),
-                list2 = listOf(
-                    "результат лямбды",
-                    "сам объект (it)",
-                    "сам объект (this)",
-                    "результат лямбды (this как receiver)",
-                ),
-                pairs = listOf(PairDto(0, 0), PairDto(1, 1), PairDto(2, 2), PairDto(3, 3)),
+            QuestionDto.Open(
+                id = "string-template",
+                theme = "Синтаксис",
+                difficultyLevel = 1,
+                description = "Какой символ начинает подстановку значения в строковый шаблон?",
+                correctText = "\$",
             ),
             QuestionDto.Choice(
-                id = "int-division",
-                theme = "Типы данных",
-                difficultyLevel = 0,
-                description = "Что вернёт выражение 10 / 3, если оба операнда типа Int?",
-                answerOptions = listOf("3", "3.33", "3.0", "Ошибка компиляции"),
-                correctOption = 1,
+                id = "when-expression",
+                theme = "Синтаксис",
+                difficultyLevel = 2,
+                description = "Что произойдёт, если when используется как выражение без ветки else?",
+                answerOptions = listOf(
+                    "Вернётся null",
+                    "Ошибка компиляции, если ветки не покрывают все случаи",
+                    "Всегда ошибка компиляции",
+                    "Вернётся Unit",
+                ),
+                correctOption = 2,
             ),
 
-            // ───── Уровень 1 ─────
+            // ───────── Безопасность null ─────────
             QuestionDto.Choice(
                 id = "safe-call",
                 theme = "Безопасность null",
@@ -69,15 +78,8 @@ object DemoData {
                 answerOptions = listOf("Всегда", "Если x == null", "Если x == 0", "Никогда"),
                 correctOption = 2,
             ),
-            QuestionDto.Open(
-                id = "string-template",
-                theme = "Синтаксис",
-                difficultyLevel = 1,
-                description = "Какой символ начинает подстановку значения в строковый шаблон?",
-                correctText = "$",
-            ),
 
-            // ───── Уровень 2 ─────
+            // ───────── Коллекции ─────────
             QuestionDto.Choice(
                 id = "list-vs-mutablelist",
                 theme = "Коллекции",
@@ -91,19 +93,6 @@ object DemoData {
                 ),
                 correctOption = 1,
             ),
-            QuestionDto.Choice(
-                id = "when-expression",
-                theme = "Синтаксис",
-                difficultyLevel = 2,
-                description = "Что произойдёт, если when используется как выражение без ветки else?",
-                answerOptions = listOf(
-                    "Вернётся null",
-                    "Ошибка компиляции, если ветки не покрывают все случаи",
-                    "Всегда ошибка компиляции",
-                    "Вернётся Unit",
-                ),
-                correctOption = 2,
-            ),
             QuestionDto.Open(
                 id = "associate-by",
                 theme = "Коллекции",
@@ -112,14 +101,14 @@ object DemoData {
                 correctText = "associateBy",
             ),
 
-            // ───── Уровень 3 ─────
+            // ───────── Типы данных ─────────
             QuestionDto.Choice(
-                id = "data-class-generated",
-                theme = "ООП",
-                difficultyLevel = 3,
-                description = "Какой метод НЕ генерируется автоматически для data class?",
-                answerOptions = listOf("equals()", "hashCode()", "compareTo()", "copy()"),
-                correctOption = 3,
+                id = "int-division",
+                theme = "Типы данных",
+                difficultyLevel = 0,
+                description = "Что вернёт выражение 10 / 3, если оба операнда типа Int?",
+                answerOptions = listOf("3", "3.33", "3.0", "Ошибка компиляции"),
+                correctOption = 1,
             ),
             QuestionDto.Choice(
                 id = "lateinit-limits",
@@ -128,28 +117,6 @@ object DemoData {
                 description = "С каким типом свойства нельзя использовать lateinit?",
                 answerOptions = listOf("String", "Int", "List<String>", "MutableMap<String, Int>"),
                 correctOption = 2,
-            ),
-
-            // ───── Уровень 4 ─────
-            QuestionDto.Choice(
-                id = "sealed-vs-enum",
-                theme = "ООП",
-                difficultyLevel = 4,
-                description = "В чём главное преимущество sealed interface перед enum?",
-                answerOptions = listOf(
-                    "Он быстрее работает",
-                    "Наследники могут хранить собственные данные разных типов",
-                    "Он не требует when",
-                    "Его можно наследовать из другого модуля",
-                ),
-                correctOption = 2,
-            ),
-            QuestionDto.Open(
-                id = "inline-keyword",
-                theme = "Функции",
-                difficultyLevel = 4,
-                description = "Какое ключевое слово позволяет использовать reified-параметр типа?",
-                correctText = "inline",
             ),
             QuestionDto.Matching(
                 id = "variance-modifiers",
@@ -165,8 +132,36 @@ object DemoData {
                 ),
                 pairs = listOf(PairDto(0, 0), PairDto(1, 1), PairDto(2, 2), PairDto(3, 3)),
             ),
+            QuestionDto.Open(
+                id = "nothing-type",
+                theme = "Типы данных",
+                difficultyLevel = 5,
+                description = "Какой тип в Kotlin является подтипом всех типов и не имеет ни одного значения?",
+                correctText = "Nothing",
+            ),
 
-            // ───── Уровень 5 ─────
+            // ───────── Функции ─────────
+            QuestionDto.Matching(
+                id = "scope-functions-return",
+                theme = "Функции",
+                difficultyLevel = 3,
+                description = "Сопоставьте scope-функцию с тем, что она возвращает",
+                list1 = listOf("let", "also", "apply", "run"),
+                list2 = listOf(
+                    "результат лямбды",
+                    "сам объект (it)",
+                    "сам объект (this)",
+                    "результат лямбды (this как receiver)",
+                ),
+                pairs = listOf(PairDto(0, 0), PairDto(1, 1), PairDto(2, 2), PairDto(3, 3)),
+            ),
+            QuestionDto.Open(
+                id = "inline-keyword",
+                theme = "Функции",
+                difficultyLevel = 4,
+                description = "Какое ключевое слово позволяет использовать reified-параметр типа?",
+                correctText = "inline",
+            ),
             QuestionDto.Choice(
                 id = "coroutine-suspend",
                 theme = "Функции",
@@ -177,6 +172,29 @@ object DemoData {
                     "Превращает в конечный автомат и добавляет параметр Continuation",
                     "Помечает её как synchronized",
                     "Компилирует в JavaScript",
+                ),
+                correctOption = 2,
+            ),
+
+            // ───────── ООП ─────────
+            QuestionDto.Choice(
+                id = "data-class-generated",
+                theme = "ООП",
+                difficultyLevel = 3,
+                description = "Какой метод НЕ генерируется автоматически для data class?",
+                answerOptions = listOf("equals()", "hashCode()", "compareTo()", "copy()"),
+                correctOption = 3,
+            ),
+            QuestionDto.Choice(
+                id = "sealed-vs-enum",
+                theme = "ООП",
+                difficultyLevel = 4,
+                description = "В чём главное преимущество sealed interface перед enum?",
+                answerOptions = listOf(
+                    "Он быстрее работает",
+                    "Наследники могут хранить собственные данные разных типов",
+                    "Он не требует when",
+                    "Его можно наследовать из другого модуля",
                 ),
                 correctOption = 2,
             ),
@@ -193,14 +211,32 @@ object DemoData {
                 ),
                 correctOption = 2,
             ),
-            QuestionDto.Open(
-                id = "nothing-type",
-                theme = "Типы данных",
-                difficultyLevel = 5,
-                description = "Какой тип в Kotlin является подтипом всех типов и не имеет ни одного значения?",
-                correctText = "Nothing",
+
+            // ───────── Физика ─────────
+            QuestionDto.Choice(
+                id = "NewtonLaws",
+                theme = "Физика",
+                difficultyLevel = 1,
+                description = "Сколько законов придумал Ньютон?",
+                answerOptions = listOf("1", "2", "3", "4", "5", "6"),
+                correctOption = 3,
             ),
-            // ← сюда переносите остальные вопросы из прежнего QuestionRepository.default()
+            QuestionDto.Open(
+                id = "NewtonLaw",
+                theme = "Физика",
+                difficultyLevel = 2,
+                description = "Выпишите уравнение 2 закона Ньютона",
+                correctText = "F=ma",
+            ),
+            QuestionDto.Matching(
+                id = "Newton",
+                theme = "Физика",
+                difficultyLevel = 3,
+                description = "Сопоставьте формулу и закон Ньютона",
+                list1 = listOf("F=ma", "v=0", "F1+F2=0"),
+                list2 = listOf("1 Закон", "2 Закон", "3 Закон"),
+                pairs = listOf(PairDto(0, 1), PairDto(1, 0), PairDto(2, 2)),
+            ),
         ),
     )
 }
