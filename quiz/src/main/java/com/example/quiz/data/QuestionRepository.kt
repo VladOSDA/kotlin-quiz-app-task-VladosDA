@@ -6,16 +6,39 @@ import com.example.quiz.data.dto.toDto
 import com.example.quiz.domain.QuestionTheme
 import com.example.quiz.domain.QuestionType
 
-class QuestionRepository(private val storage: JsonDataSource) {
+class QuestionRepository(private val storage: JsonDataSource,
+                         var fileName: String = DEFAULT_FILE_NAME) {
 
     private val questions = mutableListOf<QuestionType>()
     private val themes = mutableListOf<QuestionTheme>()
 
+    val fileNameWithExtension: String
+        get() = "$fileName.json".trim()
+
+
+
     init {
-        val bank = storage.load(FILE_NAME, QuestionBankDto.serializer()) { DemoData.questionBank() }
+        loadFrom(fileNameWithExtension) { DemoData.questionBank() }
+    }
+
+    fun switchFile(newFileName: String) {
+        val trimmed = newFileName.trim()
+        require(trimmed.isNotEmpty()) { "Имя файла не может быть пустым" }
+        val target = "$trimmed.json"
+
+        loadFrom(target) { error("unreachable") } // exists() already checked
+        fileName = trimmed
+
+    }
+
+    private fun loadFrom(nameWithExtension: String, fallback: () -> QuestionBankDto) {
+        val bank = storage.load(nameWithExtension, QuestionBankDto.serializer(), fallback)
+
+        questions.clear()
         questions += bank.questions.map { it.toDomain() }
+
+        themes.clear()
         themes += bank.themes.map { QuestionTheme(it) }
-        // темы, встречающиеся у вопросов, но отсутствующие в списке тем
         themes += questions.map { it.theme }.distinct().filter { it !in themes }
 
         val duplicates = questions.groupingBy { it.id }.eachCount().filterValues { it > 1 }.keys
@@ -67,13 +90,13 @@ class QuestionRepository(private val storage: JsonDataSource) {
 
     private fun persist() {
         storage.save(
-            FILE_NAME,
+            fileNameWithExtension,
             QuestionBankDto.serializer(),
             QuestionBankDto(themes.map { it.themeName }, questions.map { it.toDto() }),
         )
     }
 
     companion object {
-        const val FILE_NAME = "questions.json"
+        const val DEFAULT_FILE_NAME = "questions"
     }
 }

@@ -85,6 +85,8 @@ class AdminEngine(
 
     fun removeAttempt(id: String): Boolean = attempts.remove(id.trim())
 
+    fun switchQuestionFile(fileName: String) = questions.switchFile(fileName)
+    fun getQuestionFileName() = questions.fileNameWithExtension
     // ───── Выгрузка ─────
 
     fun export(fileName: String = "export"): Path {

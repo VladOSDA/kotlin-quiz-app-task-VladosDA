@@ -33,6 +33,7 @@ class AdminCli(private val admin: AdminEngine) {
             "attempt-del" -> removeAttempt(arg)
             "export" -> export(arg)
             "logout" -> return false
+            "question-file" -> switchQuestionsFile(arg)
             else -> println("Неизвестная команда «$head». Справка — help")
         }
         return true
@@ -150,7 +151,13 @@ class AdminCli(private val admin: AdminEngine) {
         }
 
         admin.addQuestion(question)
-        println("Вопрос «$id» добавлен и сохранён в questions.json.")
+        println("Вопрос «$id» добавлен и сохранён в ${admin.getQuestionFileName()}.")
+    }
+
+    private fun switchQuestionsFile(arg: String?) {
+        requireArg(arg, "question-file <имя файла>")
+        admin.switchQuestionFile(arg!!.trim())
+        println("Теперь используется файл: ${arg.trim()}.json")
     }
 
     private fun editQuestion(arg: String?) {
@@ -356,6 +363,7 @@ class AdminCli(private val admin: AdminEngine) {
               attempts [логин]        — попытки (все или одного студента)
               attempt-del <id>        — удалить попытку (пересдача)
               export [имя файла]      — выгрузить всё в JSON
+              question-file <имя>     — переключиться на другой файл вопросов (создаст, если нет)
               logout                  — выйти из режима администратора
               exit                    — выход из программы
             """.trimIndent()

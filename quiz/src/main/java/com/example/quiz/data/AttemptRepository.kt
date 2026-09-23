@@ -5,12 +5,17 @@ import com.example.quiz.data.dto.toDomain
 import com.example.quiz.data.dto.toDto
 import com.example.quiz.domain.AttemptRecord
 
-class AttemptRepository(private val storage: JsonDataSource) {
+class AttemptRepository(private val storage: JsonDataSource,
+                        var fileName: String = ConfigRepository.DEFAULT_FILE_NAME
+) {
 
     private val attempts = mutableListOf<AttemptRecord>()
 
+    private val fileNameWithExtension: String
+        get() = "$fileName.json".trim()
+
     init {
-        val file = storage.load(FILE_NAME, AttemptsFileDto.serializer()) { AttemptsFileDto() }
+        val file = storage.load(fileNameWithExtension, AttemptsFileDto.serializer()) { AttemptsFileDto() }
         attempts += file.attempts.map { it.toDomain() }
     }
 
@@ -35,10 +40,10 @@ class AttemptRepository(private val storage: JsonDataSource) {
     }
 
     private fun persist() {
-        storage.save(FILE_NAME, AttemptsFileDto.serializer(), AttemptsFileDto(attempts.map { it.toDto() }))
+        storage.save(fileNameWithExtension, AttemptsFileDto.serializer(), AttemptsFileDto(attempts.map { it.toDto() }))
     }
 
     companion object {
-        const val FILE_NAME = "attempts.json"
+        const val DEFAULT_FILE_NAME = "attempts.json"
     }
 }

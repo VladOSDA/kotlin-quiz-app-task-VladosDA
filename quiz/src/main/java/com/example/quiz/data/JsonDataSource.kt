@@ -3,6 +3,7 @@ package com.example.quiz.data
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
+import java.io.File
 import java.nio.file.AtomicMoveNotSupportedException
 import java.nio.file.Files
 import java.nio.file.Path
@@ -46,7 +47,7 @@ class JsonDataSource(private val dataDir: Path) {
         temp.writeText(json.encodeToString(serializer, value), Charsets.UTF_8)
         try {
             Files.move(temp, file, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE)
-        } catch (e: AtomicMoveNotSupportedException) {
+        } catch (_: AtomicMoveNotSupportedException) {
             Files.move(temp, file, StandardCopyOption.REPLACE_EXISTING)
         }
     }

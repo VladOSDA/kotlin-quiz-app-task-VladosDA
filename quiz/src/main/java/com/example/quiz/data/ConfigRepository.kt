@@ -5,12 +5,16 @@ import com.example.quiz.domain.QuizConfig
 import kotlin.time.Duration.Companion.minutes
 
 
-class ConfigRepository(private val storage: JsonDataSource) {
+class ConfigRepository(private val storage: JsonDataSource,
+                       var fileName: String = DEFAULT_FILE_NAME) {
 
     private var config: QuizConfig
 
+    private val fileNameWithExtension: String
+        get() = "$fileName.json".trim()
+
     init {
-        val dto = storage.load(FILE_NAME, QuizConfigDto.serializer()) { QuizConfigDto() }
+        val dto = storage.load(fileNameWithExtension, QuizConfigDto.serializer()) { QuizConfigDto() }
         config = QuizConfig(dto.timeLimitMinutes.minutes, dto.questionsPerTheme)
     }
 
@@ -19,7 +23,7 @@ class ConfigRepository(private val storage: JsonDataSource) {
     fun update(timeLimitMinutes: Int, questionsPerTheme: Int) {
         config = QuizConfig(timeLimitMinutes.minutes, questionsPerTheme)
         storage.save(
-            FILE_NAME,
+            fileNameWithExtension,
             QuizConfigDto.serializer(),
             QuizConfigDto(timeLimitMinutes, questionsPerTheme),
         )
@@ -29,6 +33,6 @@ class ConfigRepository(private val storage: JsonDataSource) {
         QuizConfigDto(config.timeLimit.inWholeMinutes.toInt(), config.questionsPerTheme)
 
     companion object {
-        const val FILE_NAME = "config.json"
+        const val DEFAULT_FILE_NAME = "config.json"
     }
 }
