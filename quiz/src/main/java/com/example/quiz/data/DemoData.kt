@@ -4,7 +4,6 @@ import com.example.quiz.data.dto.PairDto
 import com.example.quiz.data.dto.QuestionBankDto
 import com.example.quiz.data.dto.QuestionDto
 
-/** Демонстрационный банк вопросов — записывается в questions.json при первом запуске. */
 object DemoData {
 
     fun questionBank(): QuestionBankDto = QuestionBankDto(

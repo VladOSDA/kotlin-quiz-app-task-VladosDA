@@ -142,8 +142,13 @@ class Cli(
     }
 
     private fun reset() {
-        engine.reset()
-        println("Попытка сохранена со статусом «прервана». themes — выбрать тему заново.")
+        if (engine.hasAttempt && !engine.isAttemptFinished){
+            engine.reset()
+            println("Попытка сохранена со статусом «прервана». themes — выбрать тему заново.")
+        }
+        else{
+            println("Нет активной попытки. themes — выбрать тему заново.")
+        }
     }
 
     private fun handleExit(): Boolean {
@@ -212,8 +217,7 @@ class Cli(
     // ───── Вывод вопроса ─────
 
     private fun submitAnswer(input: String) {
-        val parsed = engine.parseAnswer(input)
-        engine.answer(parsed)
+        engine.answer(input)
         println("Ответ принят.")
 
         if (engine.isAttemptFinished) {

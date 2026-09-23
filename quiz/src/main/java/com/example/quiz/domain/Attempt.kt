@@ -53,6 +53,7 @@ class Attempt(
 
     fun addAnswer(userAnswer: Answer): Boolean {
         check(!isFinished) { "Попытка уже завершена" }
+
         val question = currentQuestion
             ?: throw IllegalStateException("Нет текущего вопроса")
 
