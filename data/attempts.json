@@ -1,0 +1,164 @@
+{
+    "attempts": [
+        {
+            "id": "96b797f4",
+            "studentLogin": "Vlados",
+            "themeName": "Физика",
+            "startedAt": "2026-09-23T11:36:26.998753900Z",
+            "finishedAt": "2026-09-23T11:37:01.776905200Z",
+            "status": "FINISHED",
+            "answers": [
+                {
+                    "questionId": "NewtonLaws",
+                    "questionText": "Сколько законов придумал Ньютон?",
+                    "studentAnswer": "3) 3",
+                    "correctAnswer": "3) 3",
+                    "isCorrect": true
+                },
+                {
+                    "questionId": "NewtonLaw",
+                    "questionText": "Выпишите уравнение 2 закона Ньютона",
+                    "studentAnswer": "F=ma",
+                    "correctAnswer": "F=ma",
+                    "isCorrect": true
+                },
+                {
+                    "questionId": "Newton",
+                    "questionText": "Сопоставьте формулу и закон Ньютона",
+                    "studentAnswer": "F=ma — 2 Закон; v=0 — 1 Закон; F1+F2=0 — 3 Закон",
+                    "correctAnswer": "F=ma — 2 Закон; v=0 — 1 Закон; F1+F2=0 — 3 Закон",
+                    "isCorrect": true
+                }
+            ]
+        },
+        {
+            "id": "1e5bfc63",
+            "studentLogin": "Vlados",
+            "themeName": "Синтаксис",
+            "startedAt": "2026-09-23T11:37:50.919283500Z",
+            "finishedAt": "2026-09-23T11:37:53.690250200Z",
+            "status": "INTERRUPTED",
+            "answers": []
+        },
+        {
+            "id": "8bf2f122",
+            "studentLogin": "Vlados",
+            "themeName": "Физика",
+            "startedAt": "2026-09-23T11:46:31.565255900Z",
+            "finishedAt": "2026-09-23T11:46:47.657562400Z",
+            "status": "INTERRUPTED",
+            "answers": [
+                {
+                    "questionId": "NewtonLaws",
+                    "questionText": "Сколько законов придумал Ньютон?",
+                    "studentAnswer": "3) 3",
+                    "correctAnswer": "3) 3",
+                    "isCorrect": true
+                },
+                {
+                    "questionId": "NewtonLaw",
+                    "questionText": "Выпишите уравнение 2 закона Ньютона",
+                    "studentAnswer": "F=ma",
+                    "correctAnswer": "F=ma",
+                    "isCorrect": true
+                }
+            ]
+        },
+        {
+            "id": "a468e7a2",
+            "studentLogin": "Vlados",
+            "themeName": "Синтаксис",
+            "startedAt": "2026-09-23T12:58:44.459016800Z",
+            "finishedAt": "2026-09-23T12:59:18.176141200Z",
+            "status": "FINISHED",
+            "answers": [
+                {
+                    "questionId": "val-vs-var",
+                    "questionText": "Какой синтаксис объявляет неизменяемую (read-only) переменную?",
+                    "studentAnswer": "2) val x = 5",
+                    "correctAnswer": "2) val x = 5",
+                    "isCorrect": true
+                },
+                {
+                    "questionId": "string-template",
+                    "questionText": "Какой символ начинает подстановку значения в строковый шаблон?",
+                    "studentAnswer": "$",
+                    "correctAnswer": "$",
+                    "isCorrect": true
+                },
+                {
+                    "questionId": "when-expression",
+                    "questionText": "Что произойдёт, если when используется как выражение без ветки else?",
+                    "studentAnswer": "2) Ошибка компиляции, если ветки не покрывают все случаи",
+                    "correctAnswer": "2) Ошибка компиляции, если ветки не покрывают все случаи",
+                    "isCorrect": true
+                }
+            ]
+        },
+        {
+            "id": "81599a9a",
+            "studentLogin": "Vlados",
+            "themeName": "Физика",
+            "startedAt": "2026-09-23T14:10:27.811887200Z",
+            "finishedAt": "2026-09-23T14:10:33.380969400Z",
+            "status": "FINISHED",
+            "answers": [
+                {
+                    "questionId": "NewtonLaws",
+                    "questionText": "Сколько законов придумал Ньютон?",
+                    "studentAnswer": "2) 2",
+                    "correctAnswer": "3) 3",
+                    "isCorrect": false
+                }
+            ]
+        },
+        {
+            "id": "87c2660c",
+            "studentLogin": "Vlados",
+            "themeName": "Физика",
+            "startedAt": "2026-09-23T14:11:42.618366200Z",
+            "finishedAt": "2026-09-23T14:12:24.847235800Z",
+            "status": "FINISHED",
+            "answers": [
+                {
+                    "questionId": "NewtonLaws",
+                    "questionText": "Сколько законов придумал Ньютон?",
+                    "studentAnswer": "3) 3",
+                    "correctAnswer": "3) 3",
+                    "isCorrect": true
+                },
+                {
+                    "questionId": "NewtonLaw",
+                    "questionText": "Выпишите уравнение 2 закона Ньютона",
+                    "studentAnswer": "F=ma",
+                    "correctAnswer": "F=ma",
+                    "isCorrect": true
+                },
+                {
+                    "questionId": "Newton",
+                    "questionText": "Сопоставьте формулу и закон Ньютона",
+                    "studentAnswer": "F=ma — 2 Закон; v=0 — 1 Закон; F1+F2=0 — 3 Закон",
+                    "correctAnswer": "F=ma — 2 Закон; v=0 — 1 Закон; F1+F2=0 — 3 Закон",
+                    "isCorrect": true
+                }
+            ]
+        },
+        {
+            "id": "cba429f0",
+            "studentLogin": "Vlados",
+            "themeName": "Синтаксис",
+            "startedAt": "2026-09-23T14:18:17.342899600Z",
+            "finishedAt": "2026-09-23T14:25:21.416227800Z",
+            "status": "INTERRUPTED",
+            "answers": [
+                {
+                    "questionId": "val-vs-var",
+                    "questionText": "Какой синтаксис объявляет неизменяемую (read-only) переменную?",
+                    "studentAnswer": "2) val x = 5",
+                    "correctAnswer": "2) val x = 5",
+                    "isCorrect": true
+                }
+            ]
+        }
+    ]
+}

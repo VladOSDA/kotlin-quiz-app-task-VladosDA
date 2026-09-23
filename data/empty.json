@@ -1,0 +1,361 @@
+{
+    "themes": [
+        "Синтаксис",
+        "Безопасность null",
+        "Коллекции",
+        "Типы данных",
+        "Функции",
+        "ООП",
+        "Физика"
+    ],
+    "questions": [
+        {
+            "type": "choice",
+            "id": "val-vs-var",
+            "theme": "Синтаксис",
+            "difficultyLevel": 0,
+            "description": "Какой синтаксис объявляет неизменяемую (read-only) переменную?",
+            "answerOptions": [
+                "var x = 5",
+                "val x = 5",
+                "let x = 5",
+                "final x = 5"
+            ],
+            "correctOption": 2
+        },
+        {
+            "type": "open",
+            "id": "entry-point",
+            "theme": "Синтаксис",
+            "difficultyLevel": 0,
+            "description": "Как называется функция — точка входа в Kotlin-программу?",
+            "correctText": "main"
+        },
+        {
+            "type": "open",
+            "id": "string-template",
+            "theme": "Синтаксис",
+            "difficultyLevel": 1,
+            "description": "Какой символ начинает подстановку значения в строковый шаблон?",
+            "correctText": "$"
+        },
+        {
+            "type": "choice",
+            "id": "when-expression",
+            "theme": "Синтаксис",
+            "difficultyLevel": 2,
+            "description": "Что произойдёт, если when используется как выражение без ветки else?",
+            "answerOptions": [
+                "Вернётся null",
+                "Ошибка компиляции, если ветки не покрывают все случаи",
+                "Всегда ошибка компиляции",
+                "Вернётся Unit"
+            ],
+            "correctOption": 2
+        },
+        {
+            "type": "choice",
+            "id": "safe-call",
+            "theme": "Безопасность null",
+            "difficultyLevel": 1,
+            "description": "Что делает оператор безопасного вызова ?. (например, user?.name)?",
+            "answerOptions": [
+                "Вернёт null, если user == null",
+                "Бросит исключение, если user == null",
+                "Всегда вернёт не-null значение",
+                "Запустит корутину"
+            ],
+            "correctOption": 1
+        },
+        {
+            "type": "choice",
+            "id": "elvis",
+            "theme": "Безопасность null",
+            "difficultyLevel": 1,
+            "description": "В каком случае выражение x ?: 5 вернёт именно 5?",
+            "answerOptions": [
+                "Всегда",
+                "Если x == null",
+                "Если x == 0",
+                "Никогда"
+            ],
+            "correctOption": 2
+        },
+        {
+            "type": "choice",
+            "id": "list-vs-mutablelist",
+            "theme": "Коллекции",
+            "difficultyLevel": 2,
+            "description": "Чем List отличается от MutableList?",
+            "answerOptions": [
+                "List можно только читать, MutableList — ещё и изменять",
+                "List может хранить только числа",
+                "Ничем, это синонимы",
+                "MutableList нельзя создать"
+            ],
+            "correctOption": 1
+        },
+        {
+            "type": "open",
+            "id": "associate-by",
+            "theme": "Коллекции",
+            "difficultyLevel": 2,
+            "description": "Какая функция превращает List в Map, принимая лямбду-селектор ключа? (одно слово)",
+            "correctText": "associateBy"
+        },
+        {
+            "type": "choice",
+            "id": "int-division",
+            "theme": "Типы данных",
+            "difficultyLevel": 0,
+            "description": "Что вернёт выражение 10 / 3, если оба операнда типа Int?",
+            "answerOptions": [
+                "3",
+                "3.33",
+                "3.0",
+                "Ошибка компиляции"
+            ],
+            "correctOption": 1
+        },
+        {
+            "type": "choice",
+            "id": "lateinit-limits",
+            "theme": "Типы данных",
+            "difficultyLevel": 3,
+            "description": "С каким типом свойства нельзя использовать lateinit?",
+            "answerOptions": [
+                "String",
+                "Int",
+                "List<String>",
+                "MutableMap<String, Int>"
+            ],
+            "correctOption": 2
+        },
+        {
+            "type": "matching",
+            "id": "variance-modifiers",
+            "theme": "Типы данных",
+            "difficultyLevel": 4,
+            "description": "Сопоставьте модификатор с его ролью",
+            "list1": [
+                "out",
+                "in",
+                "reified",
+                "vararg"
+            ],
+            "list2": [
+                "ковариантность: тип только возвращается",
+                "контравариантность: тип только принимается",
+                "тип доступен в runtime",
+                "переменное число аргументов"
+            ],
+            "pairs": [
+                {
+                    "from": 0,
+                    "to": 0
+                },
+                {
+                    "from": 1,
+                    "to": 1
+                },
+                {
+                    "from": 2,
+                    "to": 2
+                },
+                {
+                    "from": 3,
+                    "to": 3
+                }
+            ]
+        },
+        {
+            "type": "open",
+            "id": "nothing-type",
+            "theme": "Типы данных",
+            "difficultyLevel": 5,
+            "description": "Какой тип в Kotlin является подтипом всех типов и не имеет ни одного значения?",
+            "correctText": "Nothing"
+        },
+        {
+            "type": "matching",
+            "id": "scope-functions-return",
+            "theme": "Функции",
+            "difficultyLevel": 3,
+            "description": "Сопоставьте scope-функцию с тем, что она возвращает",
+            "list1": [
+                "let",
+                "also",
+                "apply",
+                "run"
+            ],
+            "list2": [
+                "результат лямбды",
+                "сам объект (it)",
+                "сам объект (this)",
+                "результат лямбды (this как receiver)"
+            ],
+            "pairs": [
+                {
+                    "from": 0,
+                    "to": 0
+                },
+                {
+                    "from": 1,
+                    "to": 1
+                },
+                {
+                    "from": 2,
+                    "to": 2
+                },
+                {
+                    "from": 3,
+                    "to": 3
+                }
+            ]
+        },
+        {
+            "type": "open",
+            "id": "inline-keyword",
+            "theme": "Функции",
+            "difficultyLevel": 4,
+            "description": "Какое ключевое слово позволяет использовать reified-параметр типа?",
+            "correctText": "inline"
+        },
+        {
+            "type": "choice",
+            "id": "coroutine-suspend",
+            "theme": "Функции",
+            "difficultyLevel": 5,
+            "description": "Что на самом деле делает компилятор с suspend-функцией?",
+            "answerOptions": [
+                "Оборачивает её в отдельный поток",
+                "Превращает в конечный автомат и добавляет параметр Continuation",
+                "Помечает её как synchronized",
+                "Компилирует в JavaScript"
+            ],
+            "correctOption": 2
+        },
+        {
+            "type": "choice",
+            "id": "data-class-generated",
+            "theme": "ООП",
+            "difficultyLevel": 3,
+            "description": "Какой метод НЕ генерируется автоматически для data class?",
+            "answerOptions": [
+                "equals()",
+                "hashCode()",
+                "compareTo()",
+                "copy()"
+            ],
+            "correctOption": 3
+        },
+        {
+            "type": "choice",
+            "id": "sealed-vs-enum",
+            "theme": "ООП",
+            "difficultyLevel": 4,
+            "description": "В чём главное преимущество sealed interface перед enum?",
+            "answerOptions": [
+                "Он быстрее работает",
+                "Наследники могут хранить собственные данные разных типов",
+                "Он не требует when",
+                "Его можно наследовать из другого модуля"
+            ],
+            "correctOption": 2
+        },
+        {
+            "type": "choice",
+            "id": "delegated-properties",
+            "theme": "ООП",
+            "difficultyLevel": 5,
+            "description": "Какие операторы должен предоставлять делегат для var-свойства?",
+            "answerOptions": [
+                "только getValue",
+                "getValue и setValue",
+                "invoke и getValue",
+                "provideDelegate и invoke"
+            ],
+            "correctOption": 2
+        },
+        {
+            "type": "choice",
+            "id": "NewtonLaws",
+            "theme": "Физика",
+            "difficultyLevel": 1,
+            "description": "Сколько законов придумал Ньютон?",
+            "answerOptions": [
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6"
+            ],
+            "correctOption": 3
+        },
+        {
+            "type": "open",
+            "id": "NewtonLaw",
+            "theme": "Физика",
+            "difficultyLevel": 2,
+            "description": "Выпишите уравнение 2 закона Ньютона",
+            "correctText": "F=ma"
+        },
+        {
+            "type": "matching",
+            "id": "Newton",
+            "theme": "Физика",
+            "difficultyLevel": 3,
+            "description": "Сопоставьте формулу и закон Ньютона",
+            "list1": [
+                "F=ma",
+                "v=0",
+                "F1+F2=0"
+            ],
+            "list2": [
+                "1 Закон",
+                "2 Закон",
+                "3 Закон"
+            ],
+            "pairs": [
+                {
+                    "from": 0,
+                    "to": 1
+                },
+                {
+                    "from": 1,
+                    "to": 0
+                },
+                {
+                    "from": 2,
+                    "to": 2
+                }
+            ]
+        },
+        {
+            "type": "choice",
+            "id": "1",
+            "theme": "Синтаксис",
+            "difficultyLevel": 1,
+            "description": "1",
+            "answerOptions": [
+                "1",
+                "1",
+                "1"
+            ],
+            "correctOption": 1
+        },
+        {
+            "type": "choice",
+            "id": "1231",
+            "theme": "Синтаксис",
+            "difficultyLevel": 1,
+            "description": "1",
+            "answerOptions": [
+                "1",
+                "1"
+            ],
+            "correctOption": 1
+        }
+    ]
+}
