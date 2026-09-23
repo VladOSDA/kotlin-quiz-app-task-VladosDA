@@ -2,9 +2,9 @@ package com.example.quiz
 
 import com.example.quiz.data.AttemptRepository
 import com.example.quiz.data.ConfigRepository
-import com.example.quiz.data.JsonStorage
+import com.example.quiz.data.JsonDataSource
 import com.example.quiz.data.QuestionRepository
-import com.example.quiz.engine.AdminService
+import com.example.quiz.engine.AdminEngine
 import com.example.quiz.engine.QuizEngine
 import com.example.quiz.ui.AdminCli
 import com.example.quiz.ui.Cli
@@ -15,7 +15,7 @@ private const val DATA_DIR = "data"
 
 fun main() {
     val storage = try {
-        JsonStorage(Paths.get(DATA_DIR))
+        JsonDataSource(Paths.get(DATA_DIR))
     } catch (e: Exception) {
         println("Не удалось создать папку с данными «$DATA_DIR»: ${e.message}")
         exitProcess(1)
@@ -47,6 +47,6 @@ fun main() {
         config = config.get(),
     )
 
-    val admin = AdminService(questions, attempts, config, storage)
+    val admin = AdminEngine(questions, attempts, config, storage)
     Cli(engine, AdminCli(admin)).run()
 }

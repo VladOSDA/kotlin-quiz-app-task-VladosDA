@@ -5,7 +5,7 @@ import com.example.quiz.data.dto.toDomain
 import com.example.quiz.data.dto.toDto
 import com.example.quiz.domain.AttemptRecord
 
-class AttemptRepository(private val storage: JsonStorage) {
+class AttemptRepository(private val storage: JsonDataSource) {
 
     private val attempts = mutableListOf<AttemptRecord>()
 

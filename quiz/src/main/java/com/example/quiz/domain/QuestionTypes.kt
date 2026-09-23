@@ -9,13 +9,6 @@ internal fun requireValidDifficulty(level: Int, description: String) {
     }
 }
 
-sealed interface Answer {
-
-    data class Choice(val index: Int) : Answer
-    data class Text(val value: String) : Answer
-    data class Matching(val pairs: Map<Int, Int>) : Answer
-}
-
 sealed interface QuestionType{
     val theme: QuestionTheme
 
@@ -118,8 +111,3 @@ data class MapOptions(
 }
 
 
-data class AnsweredQuestion(
-    val questionId: String,
-    val answer: Answer,
-    val isCorrect: Boolean
-)

@@ -1,4 +1,10 @@
-package com.example.quiz.domain
+package com.example.quiz.engine.utils
+
+import com.example.quiz.domain.Answer
+import com.example.quiz.domain.MapOptions
+import com.example.quiz.domain.MultipleChoice
+import com.example.quiz.domain.OpenQuestion
+import com.example.quiz.domain.QuestionType
 
 object AnswerFormatter {
 

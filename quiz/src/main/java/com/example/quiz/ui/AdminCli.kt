@@ -4,14 +4,14 @@ import com.example.quiz.domain.MapOptions
 import com.example.quiz.domain.MultipleChoice
 import com.example.quiz.domain.OpenQuestion
 import com.example.quiz.domain.QuestionType
-import com.example.quiz.engine.AdminService
+import com.example.quiz.engine.AdminEngine
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
 private val adminDateFormat =
     DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm").withZone(ZoneId.systemDefault())
 
-class AdminCli(private val admin: AdminService) {
+class AdminCli(private val admin: AdminEngine) {
 
     /** Возвращает false, если админ вышел из режима. */
     fun dispatch(head: String, arg: String?): Boolean {

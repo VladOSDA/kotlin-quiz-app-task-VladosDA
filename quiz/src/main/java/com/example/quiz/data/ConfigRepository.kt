@@ -1,17 +1,11 @@
 package com.example.quiz.data
 
 import com.example.quiz.data.dto.QuizConfigDto
-import kotlin.time.Duration
+import com.example.quiz.domain.QuizConfig
 import kotlin.time.Duration.Companion.minutes
 
-data class QuizConfig(val timeLimit: Duration, val questionsPerTheme: Int) {
-    init {
-        require(questionsPerTheme > 0) { "Лимит вопросов на тему должен быть больше 0" }
-        require(timeLimit.isPositive()) { "Лимит времени должен быть больше 0" }
-    }
-}
 
-class ConfigRepository(private val storage: JsonStorage) {
+class ConfigRepository(private val storage: JsonDataSource) {
 
     private var config: QuizConfig
 

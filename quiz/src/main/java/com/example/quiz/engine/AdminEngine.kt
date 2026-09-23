@@ -2,9 +2,9 @@ package com.example.quiz.engine
 
 import com.example.quiz.data.AttemptRepository
 import com.example.quiz.data.ConfigRepository
-import com.example.quiz.data.JsonStorage
+import com.example.quiz.data.JsonDataSource
 import com.example.quiz.data.QuestionRepository
-import com.example.quiz.data.QuizConfig
+import com.example.quiz.domain.QuizConfig
 import com.example.quiz.data.dto.ExportDto
 import com.example.quiz.data.dto.QuestionBankDto
 import com.example.quiz.data.dto.toDto
@@ -14,11 +14,11 @@ import com.example.quiz.domain.QuestionType
 import java.nio.file.Path
 import java.time.Instant
 
-class AdminService(
+class AdminEngine(
     private val questions: QuestionRepository,
     private val attempts: AttemptRepository,
     private val config: ConfigRepository,
-    private val storage: JsonStorage,
+    private val storage: JsonDataSource,
 ) {
 
     // ───── Темы ─────
@@ -87,9 +87,11 @@ class AdminService(
 
     // ───── Выгрузка ─────
 
-    fun export(fileName: String = "export.json"): Path {
+    fun export(fileName: String = "export"): Path {
+        val timestamp = Instant.now().toString()
+
         val dto = ExportDto(
-            exportedAt = Instant.now().toString(),
+            exportedAt = timestamp,
             config = config.dto(),
             questionBank = QuestionBankDto(
                 themes = questions.themes().map { it.themeName },
@@ -97,7 +99,9 @@ class AdminService(
             ),
             attempts = attempts.all().map { it.toDto() },
         )
-        storage.save(fileName, ExportDto.serializer(), dto)
-        return storage.path(fileName).toAbsolutePath()
+        val timestampForFile = timestamp.split("T")[0] + "-"+ timestamp.split("T")[1].replace(":","-").replace(".","-").replace("Z","")
+        val nameOfFile = "${fileName}_${timestampForFile}.json"
+        storage.save(nameOfFile, ExportDto.serializer(), dto)
+        return storage.path(nameOfFile).toAbsolutePath()
     }
 }

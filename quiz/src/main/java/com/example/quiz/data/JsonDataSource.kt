@@ -11,7 +11,7 @@ import kotlin.io.path.readText
 import kotlin.io.path.writeText
 
 /** Чтение и запись JSON-файлов в папке с данными. Файл создаётся при первом обращении. */
-class JsonStorage(private val dataDir: Path) {
+class JsonDataSource(private val dataDir: Path) {
 
     private val json = Json {
         prettyPrint = true

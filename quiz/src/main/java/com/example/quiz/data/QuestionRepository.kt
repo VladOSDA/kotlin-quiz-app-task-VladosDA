@@ -6,7 +6,7 @@ import com.example.quiz.data.dto.toDto
 import com.example.quiz.domain.QuestionTheme
 import com.example.quiz.domain.QuestionType
 
-class QuestionRepository(private val storage: JsonStorage) {
+class QuestionRepository(private val storage: JsonDataSource) {
 
     private val questions = mutableListOf<QuestionType>()
     private val themes = mutableListOf<QuestionTheme>()
