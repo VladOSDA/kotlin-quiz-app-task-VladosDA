@@ -1,9 +1,9 @@
 package com.example.quiz.ui
 
-import com.example.quiz.domain.MapOptions
-import com.example.quiz.domain.MultipleChoice
-import com.example.quiz.domain.OpenQuestion
-import com.example.quiz.domain.QuestionType
+import com.example.quiz.domain.questions.MapOptions
+import com.example.quiz.domain.questions.MultipleChoice
+import com.example.quiz.domain.questions.OpenQuestion
+import com.example.quiz.domain.questions.QuestionType
 import com.example.quiz.engine.AdminEngine
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter

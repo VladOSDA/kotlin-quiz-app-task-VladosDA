@@ -33,6 +33,6 @@ class ConfigRepository(private val storage: JsonDataSource,
         QuizConfigDto(config.timeLimit.inWholeMinutes.toInt(), config.questionsPerTheme)
 
     companion object {
-        const val DEFAULT_FILE_NAME = "config.json"
+        const val DEFAULT_FILE_NAME = "config"
     }
 }

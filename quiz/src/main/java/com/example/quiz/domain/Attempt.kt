@@ -1,5 +1,7 @@
 package com.example.quiz.domain
 
+import com.example.quiz.domain.questions.QuestionType
+
 class Attempt(
     private val questions: List<QuestionType>,
     val questionLimit: Int

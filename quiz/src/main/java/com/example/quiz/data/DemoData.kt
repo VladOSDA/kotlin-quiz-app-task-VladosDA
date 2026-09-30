@@ -1,8 +1,7 @@
 package com.example.quiz.data
 
-import com.example.quiz.data.dto.PairDto
 import com.example.quiz.data.dto.QuestionBankDto
-import com.example.quiz.data.dto.QuestionDto
+import com.example.quiz.data.dto.QuestionsDto
 
 object DemoData {
 
@@ -19,29 +18,29 @@ object DemoData {
         questions = listOf(
 
             // ───────── Синтаксис ─────────
-            QuestionDto.Choice(
+            QuestionsDto.Choice(
                 id = "val-vs-var",
                 theme = "Синтаксис",
                 difficultyLevel = 0,
                 description = "Какой синтаксис объявляет неизменяемую (read-only) переменную?",
                 answerOptions = listOf("var x = 5", "val x = 5", "let x = 5", "final x = 5"),
-                correctOption = 2,
+                correctAnswer = 2,
             ),
-            QuestionDto.Open(
+            QuestionsDto.Open(
                 id = "entry-point",
                 theme = "Синтаксис",
                 difficultyLevel = 0,
                 description = "Как называется функция — точка входа в Kotlin-программу?",
-                correctText = "main",
+                correctAnswer = "main",
             ),
-            QuestionDto.Open(
+            QuestionsDto.Open(
                 id = "string-template",
                 theme = "Синтаксис",
                 difficultyLevel = 1,
                 description = "Какой символ начинает подстановку значения в строковый шаблон?",
-                correctText = "\$",
+                correctAnswer = "$",
             ),
-            QuestionDto.Choice(
+            QuestionsDto.Choice(
                 id = "when-expression",
                 theme = "Синтаксис",
                 difficultyLevel = 2,
@@ -52,11 +51,11 @@ object DemoData {
                     "Всегда ошибка компиляции",
                     "Вернётся Unit",
                 ),
-                correctOption = 2,
+                correctAnswer = 2,
             ),
 
             // ───────── Безопасность null ─────────
-            QuestionDto.Choice(
+            QuestionsDto.Choice(
                 id = "safe-call",
                 theme = "Безопасность null",
                 difficultyLevel = 1,
@@ -67,19 +66,19 @@ object DemoData {
                     "Всегда вернёт не-null значение",
                     "Запустит корутину",
                 ),
-                correctOption = 1,
+                correctAnswer = 1,
             ),
-            QuestionDto.Choice(
+            QuestionsDto.Choice(
                 id = "elvis",
                 theme = "Безопасность null",
                 difficultyLevel = 1,
                 description = "В каком случае выражение x ?: 5 вернёт именно 5?",
                 answerOptions = listOf("Всегда", "Если x == null", "Если x == 0", "Никогда"),
-                correctOption = 2,
+                correctAnswer = 2,
             ),
 
             // ───────── Коллекции ─────────
-            QuestionDto.Choice(
+            QuestionsDto.Choice(
                 id = "list-vs-mutablelist",
                 theme = "Коллекции",
                 difficultyLevel = 2,
@@ -90,34 +89,34 @@ object DemoData {
                     "Ничем, это синонимы",
                     "MutableList нельзя создать",
                 ),
-                correctOption = 1,
+                correctAnswer = 1,
             ),
-            QuestionDto.Open(
+            QuestionsDto.Open(
                 id = "associate-by",
                 theme = "Коллекции",
                 difficultyLevel = 2,
                 description = "Какая функция превращает List в Map, принимая лямбду-селектор ключа? (одно слово)",
-                correctText = "associateBy",
+                correctAnswer = "associateBy",
             ),
 
             // ───────── Типы данных ─────────
-            QuestionDto.Choice(
+            QuestionsDto.Choice(
                 id = "int-division",
                 theme = "Типы данных",
                 difficultyLevel = 0,
                 description = "Что вернёт выражение 10 / 3, если оба операнда типа Int?",
                 answerOptions = listOf("3", "3.33", "3.0", "Ошибка компиляции"),
-                correctOption = 1,
+                correctAnswer = 1,
             ),
-            QuestionDto.Choice(
+            QuestionsDto.Choice(
                 id = "lateinit-limits",
                 theme = "Типы данных",
                 difficultyLevel = 3,
                 description = "С каким типом свойства нельзя использовать lateinit?",
                 answerOptions = listOf("String", "Int", "List<String>", "MutableMap<String, Int>"),
-                correctOption = 2,
+                correctAnswer = 2,
             ),
-            QuestionDto.Matching(
+            QuestionsDto.Matching(
                 id = "variance-modifiers",
                 theme = "Типы данных",
                 difficultyLevel = 4,
@@ -129,18 +128,21 @@ object DemoData {
                     "тип доступен в runtime",
                     "переменное число аргументов",
                 ),
-                pairs = listOf(PairDto(0, 0), PairDto(1, 1), PairDto(2, 2), PairDto(3, 3)),
+                correctAnswer = mapOf(0 to 0,
+                    1 to 1,
+                    2 to 2,
+                    3 to 3,),
             ),
-            QuestionDto.Open(
+            QuestionsDto.Open(
                 id = "nothing-type",
                 theme = "Типы данных",
                 difficultyLevel = 5,
                 description = "Какой тип в Kotlin является подтипом всех типов и не имеет ни одного значения?",
-                correctText = "Nothing",
+                correctAnswer = "Nothing",
             ),
 
             // ───────── Функции ─────────
-            QuestionDto.Matching(
+            QuestionsDto.Matching(
                 id = "scope-functions-return",
                 theme = "Функции",
                 difficultyLevel = 3,
@@ -152,16 +154,19 @@ object DemoData {
                     "сам объект (this)",
                     "результат лямбды (this как receiver)",
                 ),
-                pairs = listOf(PairDto(0, 0), PairDto(1, 1), PairDto(2, 2), PairDto(3, 3)),
+                correctAnswer = mapOf(0 to 0,
+                    1 to 1,
+                    2 to 2,
+                    3 to 3,),
             ),
-            QuestionDto.Open(
+            QuestionsDto.Open(
                 id = "inline-keyword",
                 theme = "Функции",
                 difficultyLevel = 4,
                 description = "Какое ключевое слово позволяет использовать reified-параметр типа?",
-                correctText = "inline",
+                correctAnswer = "inline",
             ),
-            QuestionDto.Choice(
+            QuestionsDto.Choice(
                 id = "coroutine-suspend",
                 theme = "Функции",
                 difficultyLevel = 5,
@@ -172,19 +177,19 @@ object DemoData {
                     "Помечает её как synchronized",
                     "Компилирует в JavaScript",
                 ),
-                correctOption = 2,
+                correctAnswer = 2,
             ),
 
             // ───────── ООП ─────────
-            QuestionDto.Choice(
+            QuestionsDto.Choice(
                 id = "data-class-generated",
                 theme = "ООП",
                 difficultyLevel = 3,
                 description = "Какой метод НЕ генерируется автоматически для data class?",
                 answerOptions = listOf("equals()", "hashCode()", "compareTo()", "copy()"),
-                correctOption = 3,
+                correctAnswer = 3,
             ),
-            QuestionDto.Choice(
+            QuestionsDto.Choice(
                 id = "sealed-vs-enum",
                 theme = "ООП",
                 difficultyLevel = 4,
@@ -195,9 +200,9 @@ object DemoData {
                     "Он не требует when",
                     "Его можно наследовать из другого модуля",
                 ),
-                correctOption = 2,
+                correctAnswer = 2,
             ),
-            QuestionDto.Choice(
+            QuestionsDto.Choice(
                 id = "delegated-properties",
                 theme = "ООП",
                 difficultyLevel = 5,
@@ -208,33 +213,35 @@ object DemoData {
                     "invoke и getValue",
                     "provideDelegate и invoke",
                 ),
-                correctOption = 2,
+                correctAnswer = 2,
             ),
 
             // ───────── Физика ─────────
-            QuestionDto.Choice(
+            QuestionsDto.Choice(
                 id = "NewtonLaws",
                 theme = "Физика",
                 difficultyLevel = 1,
                 description = "Сколько законов придумал Ньютон?",
                 answerOptions = listOf("1", "2", "3", "4", "5", "6"),
-                correctOption = 3,
+                correctAnswer = 3,
             ),
-            QuestionDto.Open(
+            QuestionsDto.Open(
                 id = "NewtonLaw",
                 theme = "Физика",
                 difficultyLevel = 2,
                 description = "Выпишите уравнение 2 закона Ньютона",
-                correctText = "F=ma",
+                correctAnswer = "F=ma",
             ),
-            QuestionDto.Matching(
+            QuestionsDto.Matching(
                 id = "Newton",
                 theme = "Физика",
                 difficultyLevel = 3,
                 description = "Сопоставьте формулу и закон Ньютона",
                 list1 = listOf("F=ma", "v=0", "F1+F2=0"),
                 list2 = listOf("1 Закон", "2 Закон", "3 Закон"),
-                pairs = listOf(PairDto(0, 1), PairDto(1, 0), PairDto(2, 2)),
+                correctAnswer = mapOf(0 to 1,
+                    1 to 0,
+                    2 to 2),
             ),
         ),
     )

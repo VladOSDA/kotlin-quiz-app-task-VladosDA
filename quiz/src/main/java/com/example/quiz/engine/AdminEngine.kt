@@ -7,10 +7,10 @@ import com.example.quiz.data.QuestionRepository
 import com.example.quiz.domain.QuizConfig
 import com.example.quiz.data.dto.ExportDto
 import com.example.quiz.data.dto.QuestionBankDto
-import com.example.quiz.data.dto.toDto
+import com.example.quiz.data.dto.utils.toDto
 import com.example.quiz.domain.AttemptRecord
 import com.example.quiz.domain.QuestionTheme
-import com.example.quiz.domain.QuestionType
+import com.example.quiz.domain.questions.QuestionType
 import java.nio.file.Path
 import java.time.Instant
 

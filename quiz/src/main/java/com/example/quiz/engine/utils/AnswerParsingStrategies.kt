@@ -1,10 +1,10 @@
 package com.example.quiz.engine.utils
 
 import com.example.quiz.domain.Answer
-import com.example.quiz.domain.MapOptions
-import com.example.quiz.domain.MultipleChoice
-import com.example.quiz.domain.OpenQuestion
-import com.example.quiz.domain.QuestionType
+import com.example.quiz.domain.questions.MapOptions
+import com.example.quiz.domain.questions.MultipleChoice
+import com.example.quiz.domain.questions.OpenQuestion
+import com.example.quiz.domain.questions.QuestionType
 
 interface ParseStrategy {
     fun parseUserInput(question: QuestionType, raw: String): Answer
