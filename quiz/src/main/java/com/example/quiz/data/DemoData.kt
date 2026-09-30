@@ -4,6 +4,10 @@ import com.example.quiz.data.dto.QuestionBankDto
 import com.example.quiz.data.dto.QuestionsDto
 
 object DemoData {
+    fun emptyBank(): QuestionBankDto= QuestionBankDto(
+        themes=listOf(),
+        questions = listOf()
+    )
 
     fun questionBank(): QuestionBankDto = QuestionBankDto(
         themes = listOf(
