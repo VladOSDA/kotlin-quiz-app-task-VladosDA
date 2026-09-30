@@ -6,7 +6,7 @@ import com.example.quiz.domain.questions.MultipleChoice
 import com.example.quiz.domain.questions.OpenQuestion
 import com.example.quiz.domain.questions.QuestionType
 
-interface ParseStrategy {
+sealed interface ParseStrategy {
     fun parseUserInput(question: QuestionType, raw: String): Answer
 }
 
