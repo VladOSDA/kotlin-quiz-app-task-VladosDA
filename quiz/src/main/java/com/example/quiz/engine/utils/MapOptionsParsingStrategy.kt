@@ -2,41 +2,9 @@ package com.example.quiz.engine.utils
 
 import com.example.quiz.domain.Answer
 import com.example.quiz.domain.questions.MapOptions
-import com.example.quiz.domain.questions.MultipleChoice
-import com.example.quiz.domain.questions.OpenQuestion
 import com.example.quiz.domain.questions.QuestionType
 
-sealed interface ParseStrategy {
-    fun parseUserInput(question: QuestionType, raw: String): Answer
-}
-
-class MultipleChoiceParseStrategy : ParseStrategy {
-    override fun parseUserInput(question: QuestionType, raw: String): Answer {
-        require(question is MultipleChoice) {"Вопрос должен быть multiple choice"}
-
-        val number = raw.toIntOrNull()
-            ?: throw IllegalArgumentException(
-                "Введите номер варианта: 1..${question.answerOptions.size}"
-            )
-        if (number !in 1..question.answerOptions.size) {
-            throw IllegalArgumentException(
-                "Варианта «$number» нет — доступны номера 1..${question.answerOptions.size}"
-            )
-        }
-        return Answer.Choice(number)
-    }
-}
-
-class OpenQuestionParseStrategy : ParseStrategy {
-    override fun parseUserInput(question: QuestionType, raw: String): Answer {
-        require(question is OpenQuestion) {"Вопрос должен быть OpenQuestion"}
-
-        if (raw.isBlank()) throw IllegalArgumentException("Ответ не может быть пустым")
-        return Answer.Text(raw)
-    }
-}
-
-class MapOptionsParseStrategy : ParseStrategy {
+class MapOptionsParsingStrategy : AnswerParsingStrategy {
     override fun parseUserInput(question: QuestionType, raw: String): Answer {
         require(question is MapOptions) {"Вопрос должен быть MapOptions"}
 

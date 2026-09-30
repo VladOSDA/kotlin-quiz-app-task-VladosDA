@@ -16,7 +16,7 @@ data class OpenQuestion(
         require(description.isNotEmpty()){ "Описане должно быть не пустым!" }
         require(correctAnswer.isNotEmpty()){
             "В задании <<$description>> пустой правильный ответ!" }
-        requireValidDifficulty(difficultyLevel, description)
+        QuestionType.requireValidDifficulty(difficultyLevel, description)
     }
 
     override fun checkCorrect(answer: Answer): Boolean {

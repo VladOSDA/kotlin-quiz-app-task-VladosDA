@@ -16,9 +16,9 @@ import com.example.quiz.domain.QuestionTheme
 import com.example.quiz.domain.questions.QuestionType
 import com.example.quiz.domain.Student
 import com.example.quiz.domain.ThemeInfo
-import com.example.quiz.engine.utils.MapOptionsParseStrategy
-import com.example.quiz.engine.utils.MultipleChoiceParseStrategy
-import com.example.quiz.engine.utils.OpenQuestionParseStrategy
+import com.example.quiz.engine.utils.MapOptionsParsingStrategy
+import com.example.quiz.engine.utils.MultipleChoiceParsingStrategy
+import com.example.quiz.engine.utils.OpenQuestionParsingStrategy
 import java.time.Instant
 import java.util.UUID
 import kotlin.time.Duration
@@ -149,9 +149,9 @@ class QuizEngine(
         val question = requireNotNull(attempt.currentQuestion) { "Нет текущего вопроса" }
 
         val parsingStrategy = when(question){
-            is MultipleChoice -> MultipleChoiceParseStrategy()
-            is OpenQuestion -> OpenQuestionParseStrategy()
-            is MapOptions -> MapOptionsParseStrategy()
+            is MultipleChoice -> MultipleChoiceParsingStrategy()
+            is OpenQuestion -> OpenQuestionParsingStrategy()
+            is MapOptions -> MapOptionsParsingStrategy()
         }
 
         val answer = parsingStrategy.parseUserInput(question = question, raw=input.trim())

@@ -22,7 +22,7 @@ data class MapOptions(
             "В задании <<$description>> в правильном ответе keys не совпадает с индексами элементов!" }
         require(correctAnswer.values.toSet() == list2.indices.toSet()){
             "В задании <<$description>> в правильном ответе values не совпадает с индексами элементов!" }
-        requireValidDifficulty(difficultyLevel, description)
+        QuestionType.requireValidDifficulty(difficultyLevel, description)
     }
 
 

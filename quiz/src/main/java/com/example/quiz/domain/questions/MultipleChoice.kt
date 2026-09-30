@@ -18,7 +18,7 @@ data class MultipleChoice(
         require(answerOptions.size > 1){ "В задании <<$description>> меньше 2 ответов!"}
         require(correctAnswer in 1..answerOptions.size){
             "В задании <<$description>> correctAnswer = $correctAnswer, а вариантов всего ${answerOptions.size}" }
-        requireValidDifficulty(difficultyLevel, description)
+        QuestionType.requireValidDifficulty(difficultyLevel, description)
     }
 
     override fun checkCorrect(answer: Answer): Boolean {
