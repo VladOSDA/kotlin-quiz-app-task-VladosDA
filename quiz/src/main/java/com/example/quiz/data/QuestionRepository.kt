@@ -25,7 +25,7 @@ class QuestionRepository(private val storage: JsonDataSource,
         require(trimmed.isNotEmpty()) { "Имя файла не может быть пустым" }
         val target = "$trimmed.json"
 
-        loadFrom(target) { DemoData.emptyBank() }
+        loadFrom(target) { QuestionBankDto.emptyBank() }
         fileName = trimmed
 
     }
